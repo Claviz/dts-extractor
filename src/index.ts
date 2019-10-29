@@ -15,7 +15,7 @@ export async function getDts({ nodeModulesPath, packages }: { nodeModulesPath: s
                     if (types) {
                         typings[`node_modules/${packageName}/package.json`] = JSON.stringify({ name: packageJson.name, types });
                         const dirname = path.dirname(types) === '.' ? '' : path.dirname(types);
-                        await getTypingsInDir(nodeModulesPath, `${packageName}${dirname ? '/' : ''}${dirname}`);
+                        await getTypingsInDir(`${packageName}${dirname ? '/' : ''}${dirname}`);
                     }
                     if (packageJson.dependencies) {
                         await getTypingsForPackages(Object.keys(packageJson.dependencies));
@@ -25,13 +25,13 @@ export async function getDts({ nodeModulesPath, packages }: { nodeModulesPath: s
         }
     }
 
-    async function getTypingsInDir(rootPath: string, path2: string) {
-        const dts = (await fs.readdir(`${rootPath}/${path2}`));
+    async function getTypingsInDir(path: string) {
+        const dts = (await fs.readdir(`${nodeModulesPath}/${path}`));
         for (const fileName of dts) {
             if (fileName.endsWith('.d.ts')) {
-                typings[`node_modules/${path2}/${fileName}`] = await fs.readFile(`${rootPath}/${path2}/${fileName}`, 'utf8');
-            } else if ((await fs.lstat(`${rootPath}/${path2}/${fileName}`)).isDirectory()) {
-                await getTypingsInDir(rootPath, `${path2}/${fileName}`);
+                typings[`node_modules/${path}/${fileName}`] = await fs.readFile(`${nodeModulesPath}/${path}/${fileName}`, 'utf8');
+            } else if ((await fs.lstat(`${nodeModulesPath}/${path}/${fileName}`)).isDirectory()) {
+                await getTypingsInDir(`${path}/${fileName}`);
             }
         }
     }
