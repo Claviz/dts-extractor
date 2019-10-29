@@ -9,7 +9,7 @@ Extract definition files from local node modules.
 Usage:
 
 ```js
-const dtsExtractor = require('./lib');
+const dtsExtractor = require('dts-extractor');
 
 (async () => {
     const dts = await dtsExtractor.getDts({
