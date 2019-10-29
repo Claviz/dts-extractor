@@ -1,0 +1,39 @@
+{
+  "name": "dts-extractor",
+  "version": "1.0.0",
+  "description": "Extract definition files from local node modules.",
+  "main": "lib/index",
+  "types": "lib/index",
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "jest --coverage",
+    "codecov": "codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Claviz/dts-extractor.git"
+  },
+  "keywords": [
+    "dts",
+    "type-definition"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Claviz/dts-extractor/issues"
+  },
+  "homepage": "https://github.com/Claviz/dts-extractor#readme",
+  "devDependencies": {
+    "@types/fs-extra": "^8.0.1",
+    "@types/jest": "^24.0.12",
+    "@types/node": "^12.0.0",
+    "codecov": "^3.5.0",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5",
+    "xlstream": "1.0.11"
+  },
+  "dependencies": {
+    "fs-extra": "^8.1.0"
+  }
+}
