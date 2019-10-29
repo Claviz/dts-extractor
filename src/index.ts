@@ -13,7 +13,7 @@ export async function getDts({ nodeModulesPath, packages }: { nodeModulesPath: s
                 if (packageJson) {
                     const types = packageJson.typings || packageJson.types;
                     if (types) {
-                        typings[`node_modules/${packageName}/package.json`] = JSON.stringify(packageJson);
+                        typings[`node_modules/${packageName}/package.json`] = JSON.stringify({ name: packageJson.name, types });
                         const dirname = path.dirname(types) === '.' ? '' : path.dirname(types);
                         await getTypingsInDir(nodeModulesPath, `${packageName}${dirname ? '/' : ''}${dirname}`);
                     }
