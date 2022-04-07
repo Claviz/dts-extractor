@@ -9,8 +9,10 @@ export async function getDts({ nodeModulesPath, packages }: { nodeModulesPath: s
         for (const packageName of packages) {
             if (!parsedPackages[packageName]) {
                 parsedPackages[packageName] = true;
-                const packageJson = await fs.readJSON(`${nodeModulesPath}/${packageName}/package.json`, { throws: false });
-                if (packageJson) {
+                const packagePath = `${nodeModulesPath}/${packageName}/package.json`;
+                const packageExists = await fs.pathExists(packagePath);
+                if (packageExists) {
+                    const packageJson = await fs.readJSON(packagePath);
                     const types = packageJson.typings || packageJson.types;
                     if (types) {
                         typings[`node_modules/${packageName}/package.json`] = JSON.stringify({ name: packageJson.name, types });

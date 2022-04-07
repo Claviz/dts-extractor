@@ -1,6 +1,6 @@
 {
   "name": "dts-extractor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Extract definition files from local node modules.",
   "main": "lib/index",
   "types": "lib/index",
